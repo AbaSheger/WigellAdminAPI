@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Members</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+<h1>Member Dashboard</h1>
+<div th:each="member: ${members}">
+    <div>
+        <h3 th:text="${'First Name: ' + member.getFirstName()}"></h3>
+        <p th:text="${'Last Name: ' + member.getLastName()}"></p>
+        <p th:text="${'Email: ' + member.getEmail()}"></p>
+        <form th:action="@{/admin/deletemember}" method="post">
+            <input type="hidden" th:value="${member.getId()}" name="id">
+            <button type="submit">Delete this member</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
