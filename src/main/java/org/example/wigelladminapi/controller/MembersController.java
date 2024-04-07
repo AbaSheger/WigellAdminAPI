@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @Controller
@@ -85,11 +86,11 @@ public class MembersController {
 
 
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String deleteMember(@RequestParam long id, Model model){
+   @RequestMapping(value = "/admin/deletemember", method = RequestMethod.POST)
+    public String deleteMember(@RequestParam ("id") long id ){
         memberService.deleteMember(id);
-        model.addAttribute("members", memberService.getAllMembers());
-        return "delete-Member";
+        //model.addAttribute("members", memberService.getAllMembers());
+        return "redirect:/admin/deletemember";
     }
 
 
