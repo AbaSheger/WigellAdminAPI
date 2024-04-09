@@ -1,6 +1,7 @@
 package org.example.wigelladminapi.services;
 
 
+import jakarta.transaction.Transactional;
 import org.example.wigelladminapi.Repository.MemberRepository;
 import org.example.wigelladminapi.exceptions.ResourceNotFoundException;
 import org.example.wigelladminapi.model.Member;
@@ -75,6 +76,7 @@ public class MemberService implements MemberInterface {
 
 
     @Override
+
     public void  deleteMember(long id) {
         //delete member
         // if member not found throw ResourceNotFoundException

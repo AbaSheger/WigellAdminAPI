@@ -73,11 +73,10 @@ public class MembersController {
    @GetMapping (value = "/")         // can we add thymeleaf to list them               // can we add two methods for the thyemeleaf
     public String listMemebertoDelete(Model model){
 
-        model.addAttribute("members", memberService.getAllMembers());
 
         model.addAttribute("members", memberService.getAllMembers());
 
-        return "deleteMember";
+        return "/deleteMember";
     }
 
 
@@ -87,7 +86,7 @@ public class MembersController {
         memberService.deleteMember(id);
         //update our view
         model.addAttribute("members", memberService.getAllMembers());
-        return "deleteMember";
+        return "/deleteMember";
     }
 
 
