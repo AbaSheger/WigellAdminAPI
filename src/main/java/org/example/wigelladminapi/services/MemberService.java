@@ -5,14 +5,18 @@ import jakarta.transaction.Transactional;
 import org.example.wigelladminapi.Repository.MemberRepository;
 import org.example.wigelladminapi.exceptions.ResourceNotFoundException;
 import org.example.wigelladminapi.model.Member;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class MemberService implements MemberInterface {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
     @Autowired
     private MemberRepository memberRepository;
@@ -26,7 +30,7 @@ public class MemberService implements MemberInterface {
     public Member getMemberById(long id) {
         //get car by add
         // if member not found throw ResourceNotFoundException
-
+        LOGGER.info("deleteMember method called with id: {}", id);
         Optional<Member> existingMember = memberRepository.findById(id);
 
         if(existingMember.isPresent()){
@@ -81,14 +85,12 @@ public class MemberService implements MemberInterface {
         //delete member
         // if member not found throw ResourceNotFoundException
 
-        memberRepository.deleteById(id);
-       /* Optional<Member> existingMember = memberRepository.findById(id);
+       Optional<Member> existingMember = memberRepository.findById(id);
         if (existingMember.isPresent()) {
             memberRepository.deleteById(id);
-            return "Member deleted";
         } else {
             throw new ResourceNotFoundException("Member", "id", id);
-        } */
+        }
 
     }
 
