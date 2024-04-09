@@ -75,18 +75,18 @@ public class MemberService implements MemberInterface {
 
 
     @Override
-    public String deleteMember(long id) {
+    public void  deleteMember(long id) {
         //delete member
         // if member not found throw ResourceNotFoundException
 
-
-        Optional<Member> existingMember = memberRepository.findById(id);
+        memberRepository.deleteById(id);
+       /* Optional<Member> existingMember = memberRepository.findById(id);
         if (existingMember.isPresent()) {
             memberRepository.deleteById(id);
             return "Member deleted";
         } else {
             throw new ResourceNotFoundException("Member", "id", id);
-        }
+        } */
 
     }
 

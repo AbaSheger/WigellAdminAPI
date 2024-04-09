@@ -13,6 +13,6 @@ public interface MemberInterface {
 
     Member addMember(Member member);
 
-    String deleteMember(long id);
+    void deleteMember(long id);
 
 }
