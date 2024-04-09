@@ -58,7 +58,7 @@ public class MemberService implements MemberInterface {
 
 
     @Override
-    public Member updateMember(Member member) {
+    public Member updateMember(long id, Member member) {  // question: why should we pass the id as a parameter when we can get it from the member object itself?
 
         //check if the member exists
         // if it exists update the member
@@ -75,7 +75,7 @@ public class MemberService implements MemberInterface {
 
 
     @Override
-    public void deleteMember(long id) {
+    public String deleteMember(long id) {
         //delete member
         // if member not found throw ResourceNotFoundException
 
@@ -83,9 +83,11 @@ public class MemberService implements MemberInterface {
         Optional<Member> existingMember = memberRepository.findById(id);
         if (existingMember.isPresent()) {
             memberRepository.deleteById(id);
+            return "Member deleted";
         } else {
             throw new ResourceNotFoundException("Member", "id", id);
         }
 
     }
+
 }

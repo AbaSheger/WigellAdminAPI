@@ -9,10 +9,10 @@ public interface MemberInterface {
     List<Member> getAllMembers();
     Member getMemberById(long id);
 
-    Member updateMember(Member member);
+    Member updateMember(long id, Member member);
 
     Member addMember(Member member);
 
-    void deleteMember(long id);
+    String deleteMember(long id);
 
 }
