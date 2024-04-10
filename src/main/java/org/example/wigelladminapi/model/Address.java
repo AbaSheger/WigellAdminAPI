@@ -24,7 +24,7 @@ public class Address {
 
     @JsonIgnoreProperties("addresses")
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
     private Set<Member> members = new HashSet<>();
 
     public Address() {

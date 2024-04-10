@@ -10,13 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 @Service
 public class MemberService implements MemberInterface {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+
 
     @Autowired
     private MemberRepository memberRepository;
@@ -30,7 +29,7 @@ public class MemberService implements MemberInterface {
     public Member getMemberById(long id) {
         //get car by add
         // if member not found throw ResourceNotFoundException
-        LOGGER.info("deleteMember method called with id: {}", id);
+
         Optional<Member> existingMember = memberRepository.findById(id);
 
         if(existingMember.isPresent()){

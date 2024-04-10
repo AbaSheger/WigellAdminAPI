@@ -19,7 +19,7 @@ public class Member {
     @Column(name = "last_name", length = 50, nullable = false)
     private String lastName;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("members")
     @JoinColumn(referencedColumnName = "id")
     private Address address;
