@@ -1,13 +1,11 @@
-package org.example.wigelladminapi.controller;
+package org.example.wigelladminapi.controllers;
 
 
-import org.example.wigelladminapi.model.Member;
+import org.example.wigelladminapi.entities.Member;
 import org.example.wigelladminapi.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

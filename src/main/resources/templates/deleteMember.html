@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Delete Members</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
 <h2>Members List</h2>
@@ -14,6 +15,9 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Phone</th>
+            <th>Date Of Birth </th>
+
             <th>Actions</th>
         </tr>
         </thead>
@@ -23,9 +27,11 @@
             <td th:text="${member.firstName}"></td>
             <td th:text="${member.lastName}"></td>
             <td th:text="${member.email}"></td>
+            <td th:text="${member.phone}"></td>
+            <td th:text="${member.dateOfBirth}"></td>
             <td>
                 <!-- Delete button -->
-                <a th:href="@{|/admin/deletemember/${member.id}|}">Delete</a>
+                <a th:href="@{|/admin/deletemember/${member.id}|}">Delete Member </a>
             </td>
         </tr>
         </tbody>

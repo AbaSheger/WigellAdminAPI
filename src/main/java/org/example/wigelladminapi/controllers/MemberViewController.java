@@ -1,4 +1,4 @@
-package org.example.wigelladminapi.controller;
+package org.example.wigelladminapi.controllers;
 
 import org.example.wigelladminapi.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;

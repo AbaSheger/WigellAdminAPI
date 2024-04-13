@@ -1,5 +1,6 @@
-package org.example.wigelladminapi.model;
+package org.example.wigelladminapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -20,9 +21,9 @@ public class Member {
     private String lastName;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("members")
+    @JsonIgnore
     @JoinColumn(referencedColumnName = "id")
-    private Address address;
+    private Address addresses;
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
@@ -38,14 +39,14 @@ public class Member {
 
     }
 
-    public Member(String firstName, String lastName, Address address, String email, String phone, LocalDate dateOfBirth) {
+   /* public Member(String firstName, String lastName, Address address, String email, String phone, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.dateOfBirth = dateOfBirth;
-    }
+    } */
 
 
     public long getId() {
@@ -73,11 +74,11 @@ public class Member {
     }
 
     public Address getAddress() {
-        return address;
+        return addresses;
     }
 
     public void setAddress(Address address) {
-        this.address = address;
+        this.addresses = address;
     }
 
     public String getEmail() {

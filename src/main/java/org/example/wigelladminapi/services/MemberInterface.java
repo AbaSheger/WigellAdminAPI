@@ -1,6 +1,6 @@
 package org.example.wigelladminapi.services;
 
-import org.example.wigelladminapi.model.Member;
+import org.example.wigelladminapi.entities.Member;
 
 import java.util.List;
 
