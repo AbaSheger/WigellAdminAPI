@@ -18,7 +18,6 @@ public class MembersController {
     private MemberService memberService;
 
 
-    // List medlemmar (“/admin/members”) - All data för respektive medlem ska hämtas och presenteras i JSON-format
 
 
     @GetMapping("/members")
@@ -27,22 +26,18 @@ public class MembersController {
     }
 
 
-   // Hämta specifik medlem (“/admin/member/{id}”) - All data för specifik medlem ska hämtas och presenteras i JSON-format
     @GetMapping("/member/{id}")
     public ResponseEntity<Member> getMemberById(@PathVariable long id){
         return ResponseEntity.ok(memberService.getMemberById(id));
     }
 
 
-   /* Uppdatera en existerande medlems uppgifter (“/admin/updatemember/{id}”)
-     - Data för medlemmen ska uppdateras (Det är även okej att göra en variant av denna endpoint så att endast en body skickas till endpointen (“/admin/updatemember”)) */
 
     @PutMapping ("/updatemember/{id}")
     public ResponseEntity<Member> updateMember(@PathVariable long id, @RequestBody  Member member){
         return ResponseEntity.ok(memberService.updateMember(id, member));
     }
 
-    //Lägga till ny medlem (“/admin/addmember”) - Ny medlem läggs till i databasen // return a simple string"Ny medlem tillagd
     @PostMapping("/addmember")
     public ResponseEntity<String> addMember( @RequestBody Member member){
 
@@ -52,8 +47,6 @@ public class MembersController {
     }
 
 
-
-    // Ta bort medlem (“/admin/deletemember/{id}”) - Medlem med ett visst id raderas från databasen
     @DeleteMapping("/deletemember/{id}")
     public ResponseEntity<String> deleteMemberById(@PathVariable long id){
         memberService.deleteMember(id);

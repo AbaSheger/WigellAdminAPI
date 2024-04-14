@@ -1,6 +1,5 @@
 package org.example.wigelladminapi.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -24,20 +23,21 @@ public class Address {
     private String city;
 
 
-    @OneToMany(mappedBy = "addresses", fetch = FetchType.EAGER)
-    @JsonIgnore
+    @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
+   // @JsonIgnore
+    @JsonIgnoreProperties("address")
     private Set<Member> members = new HashSet<>();
 
     public Address() {
     }
 
-  /*  public Address(long id, String street, String postalCode, String city, Set<Member> member) {
+    public Address(long id, String street, String postalCode, String city, Set<Member> member) {
         this.id = id;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
         this.members = member;
-    } */
+    }
 
     public long getId() {
         return id;

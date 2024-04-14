@@ -11,7 +11,7 @@ public interface MemberInterface {
 
     Member updateMember(long id, Member member);
 
-    Member addMember(Member member);
+    Member addMember(Member newMember);
 
     void deleteMember(long id);
 

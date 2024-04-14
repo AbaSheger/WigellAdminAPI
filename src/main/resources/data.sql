@@ -10,7 +10,7 @@ VALUES
 
 -- Inserting initial data into the members table
 
-INSERT INTO members (first_name, last_name, addresses_id, email, phone, date_of_birth)
+INSERT INTO members (first_name, last_name, address_id, email, phone, date_of_birth)
 VALUES
     ( 'Erik', 'Svensson', 1, 'erik.svensson@example.com', '012-3456789', '1980-01-01'),
     ( 'Anna', 'Johansson', 2, 'anna.johansson@example.com', '023-4567891', '1982-02-02'),

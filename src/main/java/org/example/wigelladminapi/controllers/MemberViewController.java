@@ -14,20 +14,20 @@ public class MemberViewController {
     @Autowired
     private MemberService memberService;
 
- //Display members with a delete option
+
 
     @GetMapping ("/deletemember")
     public String listMembersToDelete(Model model) {
         model.addAttribute("members", memberService.getAllMembers());
+
         return "deletemember";
     }
 
-    //Deletion handled without redirect
     @GetMapping ("deletemember/{id}")
     public String deleteMember(@PathVariable long id, Model model){
         memberService.deleteMember(id);
         model.addAttribute("members", memberService.getAllMembers());
-        return "deletemember"; //return to the view with the updated list
+        return "deletemember";
     }
 
 

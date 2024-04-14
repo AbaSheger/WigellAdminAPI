@@ -1,7 +1,9 @@
 package org.example.wigelladminapi.services;
 
 
+import org.example.wigelladminapi.Repositories.AddressRepository;
 import org.example.wigelladminapi.Repositories.MemberRepository;
+import org.example.wigelladminapi.entities.Address;
 import org.example.wigelladminapi.exceptions.ResourceNotFoundException;
 import org.example.wigelladminapi.entities.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class MemberService implements MemberInterface {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @Override
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
@@ -25,8 +30,7 @@ public class MemberService implements MemberInterface {
 
     @Override
     public Member getMemberById(long id) {
-        //get car by add
-        // if member not found throw ResourceNotFoundException
+
 
         Optional<Member> existingMember = memberRepository.findById(id);
 
@@ -42,92 +46,51 @@ public class MemberService implements MemberInterface {
     }
 
     @Override
-    public Member addMember(Member member) {
-
-        //check if member exists
-        // if it doesnt exist save the member add  new member
-        //  map it with a new address
-
-
-
-
-        if(member.getId() == 0){
-
-            return memberRepository.save(member);
-        } else {
-            Optional<Member> existingMember = memberRepository.findById(member.getId());
-
-            if(existingMember.isPresent()){
-                throw new ResourceNotFoundException("Member", "id", member.getId());
-            } else {
-                return memberRepository.save(member);
-            }
+    public Member addMember(Member newMember) {
+        if (newMember.getAddress() == null) {
+            throw new IllegalArgumentException("Address cannot be null");
         }
 
+        Address address;
+        if (newMember.getAddress().getId() != 0) {
+            address = addressRepository.findById(newMember.getAddress().getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Address", "id", newMember.getAddress().getId()));
+        } else {
+            address = addressRepository.save(newMember.getAddress());
+        }
+
+        newMember.setAddress(address);
+
+        return memberRepository.save(newMember);
     }
-
-
    @Override
     public Member updateMember(long id, Member member) {
 
-        //check if the member exists
-        // if it exists update the member
-        // if it does not exist throw ResourceNotFoundException
-        // when member gets updated address shouldnt be null
-
-      /* Optional<Member> existingMember = memberRepository.findById(id);
-
-        if(existingMember.isPresent()){
-            Member updatedMember = existingMember.get();
-            updatedMember.setFirstName(member.getFirstName());
-            updatedMember.setLastName(member.getLastName());
-            updatedMember.setEmail(member.getEmail());
-            updatedMember.setPhone(member.getPhone());
-            updatedMember.setDateOfBirth(member.getDateOfBirth());
-            updatedMember.setAddress(member.getAddress());
+        Member existingMember = memberRepository.findById(id)
+               .orElseThrow(() -> new ResourceNotFoundException("Member", "id", id));
 
 
-            if (member.getAddress() != null) {
-                updatedMember.setAddress(member.getAddress());
-            }
-            return memberRepository.save(updatedMember);
-        } else {
-            throw new ResourceNotFoundException("Member", "id", id);
-        } */
+       existingMember.setFirstName(member.getFirstName());
+       existingMember.setLastName(member.getLastName());
+       existingMember.setEmail(member.getEmail());
+       existingMember.setPhone(member.getPhone());
+       existingMember.setDateOfBirth(member.getDateOfBirth());
 
-       memberRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Member", "id", id));
+       if (member.getAddress() != null) {
+           existingMember.setAddress(member.getAddress());
+       }
 
-       return memberRepository.save(member);
+       return memberRepository.save(existingMember);
 
 
     }
-
-   /* @Override
-    public Member updateMember(long id, Member member) {
-        Optional<Member> existingMember = memberRepository.findById(id);
-
-        if(existingMember.isPresent()){
-            Member updatedMember = existingMember.get();
-            updatedMember.setFirstName(member.getFirstName() != null ? member.getFirstName() : updatedMember.getFirstName());
-            updatedMember.setLastName(member.getLastName() != null ? member.getLastName() : updatedMember.getLastName());
-            updatedMember.setEmail(member.getEmail() != null ? member.getEmail() : updatedMember.getEmail());
-            updatedMember.setPhone(member.getPhone() != null ? member.getPhone() : updatedMember.getPhone());
-            updatedMember.setDateOfBirth(member.getDateOfBirth() != null ? member.getDateOfBirth() : updatedMember.getDateOfBirth());
-            updatedMember.setAddress(member.getAddress() != null ? member.getAddress() : updatedMember.getAddress());
-
-            return memberRepository.save(updatedMember);
-        } else {
-            throw new ResourceNotFoundException("Member", "id", id);
-        }
-    } */
 
 
 
     @Override
 
     public void  deleteMember(long id) {
-        //delete member
-        // if member not found throw ResourceNotFoundException
+
 
        Optional<Member> existingMember = memberRepository.findById(id);
         if (existingMember.isPresent()) {
