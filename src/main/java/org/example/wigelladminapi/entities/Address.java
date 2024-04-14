@@ -24,7 +24,6 @@ public class Address {
 
 
     @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
-   // @JsonIgnore
     @JsonIgnoreProperties("address")
     private Set<Member> members = new HashSet<>();
 
